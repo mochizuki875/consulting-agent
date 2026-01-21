@@ -99,9 +99,54 @@ You MUST provide your response in both English and Japanese using the following 
 Be polite and easy to understand in both languages."""
 )
 
-# Main root_agent: executes parallel processing → synthesis processing in sequence
+# Agent that outputs responses in JSON format
+json_agent = LlmAgent(
+    name="json_agent",
+    model=LiteLlm(model=MODEL_NAME, api_base=API_BASE_URL),
+    description="Formats multiple cultural perspectives and their summary as JSON",
+    instruction="""You are a data formatting assistant that outputs structured JSON.
+
+The following opinions from two different cultural perspectives are provided:
+
+**Macedonian Perspective:**
+{macedonian_opinion}
+
+**Japanese Perspective:**
+{japanese_opinion}
+
+Your task is to:
+1. Extract the English and Japanese responses separately from each perspective
+2. Provide an overall summary that integrates both perspectives in both English and Japanese
+
+You MUST output ONLY valid JSON in the following format (no markdown, no code blocks):
+{{
+  "macedonian_perspective": {{
+    "english": "<English response from Macedonian agent>",
+    "japanese": "<Japanese response from Macedonian agent>"
+  }},
+  "japanese_perspective": {{
+    "english": "<English response from Japanese agent>",
+    "japanese": "<Japanese response from Japanese agent>"
+  }},
+  "overall_summary": {{
+    "english": "<integrated summary in English>",
+    "japanese": "<integrated summary in Japanese>"
+  }}
+}}
+
+Ensure all text is properly escaped for JSON. Use \\n for line breaks within strings."""
+)
+
+# Agent that runs both synthesis and JSON output in parallel
+final_output_agent = ParallelAgent(
+    name="final_output",
+    sub_agents=[synthesis_agent, json_agent],
+    description="Generate both human-readable synthesis and JSON-formatted output"
+)
+
+# Main root_agent: executes parallel processing → final output in sequence
 root_agent = SequentialAgent(
     name="root_agent",
-    sub_agents=[parallel_consultation_agent, synthesis_agent],
+    sub_agents=[parallel_consultation_agent, final_output_agent],
     description="Coordinator that analyzes user questions from multiple cultural perspectives and provides integrated answers"
 )

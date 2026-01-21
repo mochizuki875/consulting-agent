@@ -4,12 +4,13 @@ A bilingual consultation system powered by [Google ADK (Agent Development Kit)](
 ![](./img/image.png)
 
 ## Overview
-This system consists of three main components:
+This system consists of four main components:
 - **Macedonian Agent**: Provides opinions based on Macedonian culture and values
 - **Japanese Agent**: Provides opinions based on Japanese culture and values
-- **Synthesis Agent**: Objectively integrates both perspectives into a comprehensive answer
+- **Synthesis Agent**: Objectively integrates both perspectives into a comprehensive human-readable answer
+- **JSON Agent**: Formats both perspectives and their summary as structured JSON data
 
-The root agent coordinates parallel execution of the cultural agents and synthesizes their responses into a balanced, bilingual final answer.
+The root agent coordinates parallel execution of the cultural agents, then runs both synthesis and JSON formatting in parallel to provide multiple output formats simultaneously.
 
 ## Architecture
 
@@ -22,9 +23,11 @@ parallel_consultation_agent (Parallel)
      ├─→ macedonian_agent
      └─→ japanese_agent
      ↓
-synthesis_agent
+final_output_agent (Parallel)
+     ├─→ synthesis_agent (Human-readable summary)
+     └─→ json_agent (Structured JSON output)
      ↓
-Bilingual Final Answer
+Bilingual Final Answer + JSON Data
 ```
 
 ## Prerequisites
@@ -126,7 +129,7 @@ Each cultural agent responds in this format:
 <マケドニアの視点からの日本語回答>
 ```
 
-### Final Synthesis
+### Synthesis Agent Output
 
 The synthesis agent provides a comprehensive summary:
 
@@ -140,6 +143,27 @@ The synthesis agent provides a comprehensive summary:
 - 【マケドニア人の視点】: (要点)
 - 【日本人の視点】: (要点)
 - 【総合的な見解】: (統合された結論)
+```
+
+### JSON Agent Output
+
+The JSON agent provides structured data in the following format:
+
+```json
+{
+  "macedonian_perspective": {
+    "english": "<English response from Macedonian viewpoint>",
+    "japanese": "<マケドニアの視点からの日本語回答>"
+  },
+  "japanese_perspective": {
+    "english": "<English response from Japanese viewpoint>",
+    "japanese": "<日本の視点からの日本語回答>"
+  },
+  "overall_summary": {
+    "english": "<Integrated summary in English>",
+    "japanese": "<統合サマリーの日本語>"
+  }
+}
 ```
 
 ## Project Structure
