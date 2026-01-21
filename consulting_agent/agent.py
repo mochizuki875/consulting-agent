@@ -25,7 +25,7 @@ Answer questions based on Macedonian culture, history, values, and lifestyle.
 Emphasize uniquely Macedonian perspectives and viewpoints.
 Keep your responses concise and clear, around 2-3 sentences for each language.
 
-Provide your response in both English and Japanese using the following format:
+You MUST provide your response in both English and Japanese using the following format:
 【Macedonian】
 [English response]
 <Write your actual English response here>
@@ -46,7 +46,7 @@ Answer questions based on Japanese culture, history, values, and lifestyle.
 Emphasize uniquely Japanese perspectives and viewpoints.
 Keep your responses concise and clear, around 2-3 sentences for each language.
 
-Provide your response in both English and Japanese using the following format:
+You MUST provide your response in both English and Japanese using the following format:
 【Japanese】
 [English response]
 <Write your actual English response here>
@@ -84,7 +84,7 @@ Your role is to:
 2. Clarify commonalities and differences between the two
 3. Provide an objective and balanced final view that incorporates both perspectives
 
-Provide your response in both English and Japanese using the following structure:
+You MUST provide your response in both English and Japanese using the following structure:
 
 [English Response]
 - 【Macedonian Perspective】: (key points)
