@@ -64,6 +64,7 @@ ollama serve
 ```
 
 The server will start on `http://127.0.0.1:11434` by default.
+If you access Ollama from a different machine, change the bind address with the OLLAMA_HOST environment variable.([How can I expose Ollama on my network?](https://docs.ollama.com/faq#how-can-i-expose-ollama-on-my-network))
 
 In a separate terminal, pull the required model if you haven't already:
 
