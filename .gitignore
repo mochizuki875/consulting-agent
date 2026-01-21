@@ -10,4 +10,4 @@ wheels/
 .venv
 
 # ADK generated files
-consulting_agent/.adk
+consulting_agent/.adk/
