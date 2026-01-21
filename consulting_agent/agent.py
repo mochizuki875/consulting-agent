@@ -7,14 +7,8 @@ objectively synthesizes them to present a final answer.
 """
 
 import os
-from pathlib import Path
-from dotenv import load_dotenv
 from google.adk.agents import LlmAgent, ParallelAgent, SequentialAgent
 from google.adk.models.lite_llm import LiteLlm
-
-# Load environment variables from .env file
-env_path = Path(__file__).parent / ".env"
-load_dotenv(dotenv_path=env_path)
 
 # Model configuration
 MODEL_NAME = os.getenv("MODEL_NAME", "ollama/gpt-oss:20b")
