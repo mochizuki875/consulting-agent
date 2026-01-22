@@ -113,6 +113,60 @@ adk web --port 8000
 
 Access the interface at `http://localhost:8000`
 
+### API Mode
+
+Launch the API server:
+
+```bash
+adk api_server --host 0.0.0.0 --port 8000
+```
+
+Create new session:
+
+```bash
+curl -X POST http://localhost:8000/apps/consulting_agent/users/u_123/sessions/s_123 \
+  -H "Content-Type: application/json"
+```
+
+Send a query:
+
+```bash
+curl -X POST http://localhost:8000/run \
+-H "Content-Type: application/json" \
+-d '{
+"appName": "consulting_agent",
+"userId": "u_123",
+"sessionId": "s_123",
+"newMessage": {
+    "role": "user",
+    "parts": [{
+    "text": "I have 2000 usd budget how should I spend it, buying new sofware entirely or renting one?"
+    }]
+}
+}'
+```
+
+For streaming response via SSE:
+
+```bash
+curl -X POST http://localhost:8000/run_sse \
+-H "Content-Type: application/json" \
+-d '{
+"appName": "consulting_agent",
+"userId": "u_123",
+"sessionId": "s_123",
+"newMessage": {
+    "role": "user",
+    "parts": [{
+    "text": "I have 2000 usd budget how should I spend it, buying new sofware entirely or renting one?"
+    }]
+}
+}'
+```
+
+
+More details, see [Use the API Server](https://google.github.io/adk-docs/runtime/api-server/).
+
 ## Response Format
 
 ### Sub-Agent Responses
